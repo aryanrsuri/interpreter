@@ -158,7 +158,7 @@ mod test {
         ];
 
         for t in tokens {
-            let next = lexer.consume();
+            let next = lexer.consume().unwrap();
             println!("Expected {:?}, got {:?}", t, next);
             assert_eq!(t, next)
         }
