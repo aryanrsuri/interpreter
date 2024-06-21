@@ -1,4 +1,9 @@
+/// Defines the [Token] enum
+/// Only composite tokens (Identifier, Int) require the string
+/// Scalar tokens require just the type
+/// Should I String -> Vec<u8> ?
 #[derive(Debug, PartialEq)]
+#[allow(dead_code)]
 pub enum Token {
     Illegal,
     Eof,
@@ -29,6 +34,12 @@ pub enum Token {
     NotEqual,
 }
 
+/// Lexer struct defines the high level tokeniser
+/// input: `Vec<u8>` is the input 'string'
+/// position: usize is the current index
+/// peek: usize is the next char's index
+/// ch: u8 is the byte representation of the character
+#[allow(dead_code)]
 pub struct Lexer {
     pub input: Vec<u8>,
     pub position: usize,
@@ -36,7 +47,14 @@ pub struct Lexer {
     pub ch: u8,
 }
 
+#[allow(dead_code)]
 impl Lexer {
+    /// Returns a new Lexer struct
+    /// ```
+    /// let input = String::from("let five = 5;")
+    /// let mut l = Lexer::new(input)
+    /// l.consume()
+    /// ```
     pub fn new(input: String) -> Lexer {
         let mut l = Lexer {
             input: input.into_bytes(),
@@ -88,6 +106,13 @@ impl Lexer {
         }
     }
 
+    /// Consumes the next char (or chars) to construct a Some(Token) or None
+    /// ```
+    /// (next char is) b'='
+    /// let t = l.consume();
+    /// println!("Next token is {:?}",t);
+    /// >> Assign
+    /// ```
     pub fn consume(&mut self) -> Option<Token> {
         self.read_whitespace();
         let token = match self.ch {
