@@ -1,7 +1,6 @@
+[MANIFEST]
+Writing Monkey Lang interpreter (from Thorsten's book Writing an Interpreter in Go) in Rust
 
 
-
-
-
-
-v0.0
+[RELEASES]
+v0.0/5ec2d83 Working lexer with Token types, working repl to test tokenising
