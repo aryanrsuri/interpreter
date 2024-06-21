@@ -26,7 +26,7 @@ pub enum Token {
     Else,
     Return,
     Equal,
-    Not_Equal,
+    NotEqual,
 }
 
 pub struct Lexer {
@@ -104,7 +104,7 @@ impl Lexer {
             b'!' => {
                 if self.peek_char() == b'=' {
                     self.read_char();
-                    Token::Not_Equal
+                    Token::NotEqual
                 } else {
                     Token::Bang
                 }
